@@ -1,0 +1,582 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Duolingo Design Tokens (Tailwind v4 @theme)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@theme inline {
+  /* ── Core brand colours ─────────────────────────────────────────────── */
+  --color-duo-green: #58cc02;
+  --color-duo-green-dark: #46a302;
+  --color-duo-green-light: #89e219;
+  --color-duo-green-bg: #d7ffb8;
+
+  --color-duo-blue: #1cb0f6;
+  --color-duo-blue-dark: #1899d6;
+  --color-duo-blue-light: #40c4ff;
+  --color-duo-blue-bg: #ddf4ff;
+
+  --color-duo-red: #ff4b4b;
+  --color-duo-red-dark: #ea2b2b;
+  --color-duo-red-light: #ff6b6b;
+  --color-duo-red-bg: #ffdfe0;
+
+  --color-duo-gold: #ffc800;
+  --color-duo-gold-dark: #e5b200;
+  --color-duo-gold-light: #ffd900;
+  --color-duo-gold-bg: #fff3cc;
+
+  --color-duo-purple: #ce82ff;
+  --color-duo-purple-dark: #a855f7;
+
+  --color-duo-orange: #ff9600;
+  --color-duo-orange-dark: #e08600;
+
+  /* ── Neutral grays ──────────────────────────────────────────────────── */
+  --color-duo-gray-100: #f7f7f7;
+  --color-duo-gray-200: #e5e5e5;
+  --color-duo-gray-300: #d4d4d4;
+  --color-duo-gray-400: #afafaf;
+  --color-duo-gray-500: #777777;
+  --color-duo-gray-600: #4b4b4b;
+  --color-duo-gray-700: #3c3c3c;
+
+  /* ── Background ─────────────────────────────────────────────────────── */
+  --color-background: #ffffff;
+  --color-foreground: #3c3c3c;
+
+  /* ── Typography ─────────────────────────────────────────────────────── */
+  --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Radius ─────────────────────────────────────────────────────────── */
+  --radius-duo: 16px;
+  --radius-duo-lg: 20px;
+  --radius-duo-xl: 24px;
+  --radius-duo-full: 9999px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Base styles
+   ═══════════════════════════════════════════════════════════════════════════ */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   3D Button Utility Classes
+   Duolingo's signature: rounded, thick bottom-border, press-down active
+   ═══════════════════════════════════════════════════════════════════════════ */
+.btn-3d {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 0.75rem 1.5rem;
+  border-radius: 16px;
+  border: none;
+  border-bottom: 4px solid;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.1s ease;
+  position: relative;
+  outline: none;
+}
+
+.btn-3d:active {
+  transform: translateY(4px);
+  border-bottom-width: 0;
+}
+
+.btn-3d:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none !important;
+  border-bottom-width: 4px !important;
+}
+
+/* ── Green (primary / correct) ──────────────────────────────────────── */
+.btn-3d-green {
+  background-color: #58cc02;
+  border-bottom-color: #46a302;
+  color: #ffffff;
+}
+.btn-3d-green:hover:not(:disabled) {
+  background-color: #61d800;
+}
+
+/* ── Blue (secondary / info) ────────────────────────────────────────── */
+.btn-3d-blue {
+  background-color: #1cb0f6;
+  border-bottom-color: #1899d6;
+  color: #ffffff;
+}
+.btn-3d-blue:hover:not(:disabled) {
+  background-color: #36bcf9;
+}
+
+/* ── Red (danger / wrong) ───────────────────────────────────────────── */
+.btn-3d-red {
+  background-color: #ff4b4b;
+  border-bottom-color: #ea2b2b;
+  color: #ffffff;
+}
+.btn-3d-red:hover:not(:disabled) {
+  background-color: #ff6363;
+}
+
+/* ── Gray (ghost / skip) ────────────────────────────────────────────── */
+.btn-3d-gray {
+  background-color: #ffffff;
+  border: 2px solid #e5e5e5;
+  border-bottom: 4px solid #e5e5e5;
+  color: #afafaf;
+}
+.btn-3d-gray:hover:not(:disabled) {
+  background-color: #f7f7f7;
+}
+
+/* ── Gold (premium / special) ───────────────────────────────────────── */
+.btn-3d-gold {
+  background-color: #ffc800;
+  border-bottom-color: #e5b200;
+  color: #ffffff;
+}
+.btn-3d-gold:hover:not(:disabled) {
+  background-color: #ffce1a;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Progress Bar
+   ═══════════════════════════════════════════════════════════════════════════ */
+.progress-bar-track {
+  width: 100%;
+  height: 16px;
+  background: #e5e5e5;
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #58cc02, #89e219);
+  border-radius: 9999px;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(88, 204, 2, 0.8), 0 0 16px rgba(88, 204, 2, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.progress-bar-fill[data-active="true"]::after {
+  opacity: 1;
+  animation: glow-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(88, 204, 2, 0.8), 0 0 16px rgba(88, 204, 2, 0.4); }
+  50% { box-shadow: 0 0 12px rgba(88, 204, 2, 1), 0 0 24px rgba(88, 204, 2, 0.6); }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Status Badge (heart, streak, XP counters)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1;
+  transition: transform 0.2s;
+}
+
+.status-badge:hover {
+  transform: scale(1.05);
+}
+
+.status-badge-icon {
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+/* heartbeat animation for streak */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.3); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.2); }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+/* XP pop animation */
+@keyframes xp-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.animate-xp-pop {
+  animation: xp-pop 0.4s ease-out;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Modal overlay & content
+   ═══════════════════════════════════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 420px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Skill node on the path
+   ═══════════════════════════════════════════════════════════════════════════ */
+.skill-node {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 800;
+  border-bottom: 6px solid;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.skill-node:active {
+  transform: translateY(6px);
+  border-bottom-width: 0;
+}
+
+.skill-node-unlocked {
+  background: #58cc02;
+  border-bottom-color: #46a302;
+  color: #ffffff;
+  box-shadow: 0 4px 0 #46a302;
+}
+
+.skill-node-locked {
+  background: #e5e5e5;
+  border-bottom-color: #d4d4d4;
+  color: #afafaf;
+  cursor: not-allowed;
+  box-shadow: 0 4px 0 #d4d4d4;
+}
+
+.skill-node-locked:active {
+  transform: none;
+  border-bottom-width: 6px;
+}
+
+.skill-node-completed {
+  background: #ffc800;
+  border-bottom-color: #e5b200;
+  color: #ffffff;
+  box-shadow: 0 4px 0 #e5b200;
+}
+
+/* Crown badge on completed skill */
+.skill-crown {
+  position: absolute;
+  top: -8px;
+  right: -4px;
+  font-size: 1.25rem;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Correct/Wrong answer feedback bar
+   ═══════════════════════════════════════════════════════════════════════════ */
+.feedback-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 40;
+}
+
+.feedback-correct {
+  background: #d7ffb8;
+  border-top: 2px solid #58cc02;
+}
+
+.feedback-wrong {
+  background: #ffdfe0;
+  border-top: 2px solid #ff4b4b;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Option card (for multiple choice / word bank)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.option-card {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e5e5e5;
+  border-bottom: 4px solid #e5e5e5;
+  border-radius: 16px;
+  background: #ffffff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  transition: all 0.1s ease;
+  user-select: none;
+}
+
+.option-card:hover {
+  background: #f7f7f7;
+}
+
+.option-card:active {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+}
+
+.option-card-selected {
+  border-color: #1cb0f6;
+  background: #ddf4ff;
+  color: #1899d6;
+}
+
+.option-card-correct {
+  border-color: #58cc02;
+  background: #d7ffb8;
+  color: #46a302;
+}
+
+.option-card-wrong {
+  border-color: #ff4b4b;
+  background: #ffdfe0;
+  color: #ea2b2b;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Word bank chips (for translate exercises)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.word-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.875rem;
+  border: 2px solid #e5e5e5;
+  border-bottom: 4px solid #e5e5e5;
+  border-radius: 12px;
+  background: #ffffff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.1s ease;
+  user-select: none;
+}
+
+.word-chip:hover {
+  background: #f7f7f7;
+}
+
+.word-chip:active {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+}
+
+.word-chip-used {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Scrollbar
+   ═══════════════════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4d4d4;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #afafaf;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Dark Mode (Duolingo-specific)
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  --duo-dark-bg: #131f24;
+  --duo-dark-surface: #202f36;
+  --duo-dark-surface-raised: #2a3d47;
+  --duo-dark-border: #37464f;
+  --duo-dark-text: #e5e5e5;
+  --duo-dark-text-muted: #8a9ba5;
+}
+
+.dark body {
+  background: var(--duo-dark-bg);
+  color: var(--duo-dark-text);
+}
+
+/* ── 3D Buttons in dark mode ────────────────────────────────────────────── */
+.dark .btn-3d-gray {
+  background-color: var(--duo-dark-surface);
+  border-color: var(--duo-dark-border);
+  color: var(--duo-dark-text-muted);
+}
+.dark .btn-3d-gray:hover:not(:disabled) {
+  background-color: var(--duo-dark-surface-raised);
+}
+
+/* ── Progress bar ───────────────────────────────────────────────────────── */
+.dark .progress-bar-track {
+  background: var(--duo-dark-surface);
+}
+
+/* ── Modal ──────────────────────────────────────────────────────────────── */
+.dark .modal-overlay {
+  background: rgba(0, 0, 0, 0.75);
+}
+.dark .modal-content {
+  background: var(--duo-dark-surface);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Skill nodes ────────────────────────────────────────────────────────── */
+.dark .skill-node-locked {
+  background: var(--duo-dark-surface);
+  border-bottom-color: var(--duo-dark-border);
+  color: var(--duo-dark-text-muted);
+  box-shadow: 0 4px 0 var(--duo-dark-border);
+}
+
+/* ── Option cards ───────────────────────────────────────────────────────── */
+.dark .option-card {
+  border-color: var(--duo-dark-border);
+  background: var(--duo-dark-surface);
+  color: var(--duo-dark-text);
+}
+.dark .option-card:hover {
+  background: var(--duo-dark-surface-raised);
+}
+.dark .option-card-selected {
+  border-color: #1cb0f6;
+  background: rgba(28, 176, 246, 0.15);
+  color: #40c4ff;
+}
+
+/* ── Word chips ─────────────────────────────────────────────────────────── */
+.dark .word-chip {
+  border-color: var(--duo-dark-border);
+  background: var(--duo-dark-surface);
+  color: var(--duo-dark-text);
+}
+.dark .word-chip:hover {
+  background: var(--duo-dark-surface-raised);
+}
+
+/* ── Feedback bar ───────────────────────────────────────────────────────── */
+.dark .feedback-correct {
+  background: rgba(88, 204, 2, 0.15);
+  border-top-color: #58cc02;
+}
+.dark .feedback-wrong {
+  background: rgba(255, 75, 75, 0.15);
+  border-top-color: #ff4b4b;
+}
+
+/* ── Status badges ──────────────────────────────────────────────────────── */
+.dark .status-badge {
+  background: var(--duo-dark-surface);
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────── */
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--duo-dark-border);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--duo-dark-text-muted);
+}
+
+/* ── Page-level dark mode overrides ─────────────────────────────────────── */
+.dark .lb-page {
+  --page-bg: #131f24;
+  --lb-card: #202f36;
+  --lb-border: #37464f;
+  --lb-text: #e5e5e5;
+  --lb-highlight: rgba(88, 204, 2, 0.12);
+}
+
+.dark .profile-page {
+  --page-bg: #131f24;
+  --card-bg: #202f36;
+  --card-border: #37464f;
+  --text-primary: #e5e5e5;
+  --text-muted: #8a9ba5;
+}
+
+.dark .lesson-page {
+  --lesson-bg: #131f24;
+}
+

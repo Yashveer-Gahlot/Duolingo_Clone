@@ -1,0 +1,41 @@
+"""
+Database configuration for the Duolingo Clone backend.
+Uses SQLite with SQLAlchemy ORM.
+"""
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base, Session
+from typing import Generator
+
+# ---------------------------------------------------------------------------
+# Database URL – SQLite file stored alongside the backend package
+# ---------------------------------------------------------------------------
+SQLALCHEMY_DATABASE_URL = "sqlite:///./duolingo_clone.db"
+
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL,
+    connect_args={"check_same_thread": False},  # Required for SQLite
+    echo=False,
+)
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+Base = declarative_base()
+
+
+# ---------------------------------------------------------------------------
+# Dependency injection helper – yields a DB session per request
+# ---------------------------------------------------------------------------
+def get_db() -> Generator[Session, None, None]:
+    """FastAPI dependency that provides a database session per request."""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+def init_db() -> None:
+    """Create all tables defined by the ORM models (if they don't exist)."""
+    from app import models  # noqa: F401 – import so Base knows about all tables
+    Base.metadata.create_all(bind=engine)
