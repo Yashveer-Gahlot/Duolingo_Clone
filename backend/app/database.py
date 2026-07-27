@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base, Session
 from typing import Generator
 
 # ---------------------------------------------------------------------------
-# Database URL – SQLite file stored alongside the backend package
+# Database URL – SQLite file path (uses /tmp on Vercel)
 # ---------------------------------------------------------------------------
 
 if os.getenv("VERCEL"):
@@ -17,7 +17,8 @@ else:
     # Local development path
     DB_PATH = os.path.join(os.path.dirname(__file__), "..", "duolingo_clone.db")
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./duolingo_clone.db"
+# Use DB_PATH dynamically instead of hardcoding
+SQLALCHEMY_DATABASE_URL = f"sqlite:///{DB_PATH}"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
