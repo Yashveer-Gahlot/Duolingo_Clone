@@ -2,7 +2,7 @@
 Database configuration for the Duolingo Clone backend.
 Uses SQLite with SQLAlchemy ORM.
 """
-
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 from typing import Generator
@@ -10,6 +10,13 @@ from typing import Generator
 # ---------------------------------------------------------------------------
 # Database URL – SQLite file stored alongside the backend package
 # ---------------------------------------------------------------------------
+
+if os.getenv("VERCEL"):
+    DB_PATH = "/tmp/duolingo_clone.db"
+else:
+    # Local development path
+    DB_PATH = os.path.join(os.path.dirname(__file__), "..", "duolingo_clone.db")
+
 SQLALCHEMY_DATABASE_URL = "sqlite:///./duolingo_clone.db"
 
 engine = create_engine(
