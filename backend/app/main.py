@@ -19,6 +19,14 @@ from app.routers import users, courses, lessons, leaderboard, achievements, soci
 # ---------------------------------------------------------------------------
 # Lifespan – initialise the DB on startup
 # ---------------------------------------------------------------------------
+
+# Call DB initialization directly so serverless functions initialize /tmp/app.db
+try:
+    init_db()
+    seed_database()
+except Exception as e:
+    print(f"Startup DB Error: {e}")
+
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     init_db()
